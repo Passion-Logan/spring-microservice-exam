@@ -21,8 +21,6 @@
     </developers>
 
     <modules>
-        <module>modules</module>
-        <module>zipkin-service</module>
         <module>config-service</module>
         <module>gateway-service</module>
         <module>common</module>
