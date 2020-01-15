@@ -6,7 +6,90 @@
 
     <groupId>com.github.tangyi</groupId>
     <artifactId>spring-microservice-exam</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>${revision}</version>
+
+    <packaging>pom</packaging>
+    <name>spring-microservice-exam</name>
+    <description>微服务在线考试系统</description>
+    <url>https://gitee.com/wells2333/spring-micoservices-exam.git</url>
+    <developers>
+        <developer>
+            <name>tangyi</name>
+            <email>1633736729@qq.com</email>
+            <url>https://gitee.com/wells2333</url>
+        </developer>
+    </developers>
+
+    <modules>
+        <module>config-service</module>
+        <module>gateway-service</module>
+        <module>common</module>
+        <module>monitor-service</module>
+        <module>modules</module>
+        <module>zipkin-service</module>
+        <module>config-service</module>
+    </modules>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.11.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <properties>
+        <!-- 版本号 -->
+        <revision>3.5.0</revision>
+        <!-- 编译 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <javadoc.version>3.0.0</javadoc.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <!-- spring boot、spring cloud -->
+        <spring-boot.version>2.1.11.RELEASE</spring-boot.version>
+        <spring-cloud.version>Greenwich.SR4</spring-cloud.version>
+        <spring-boot-admin.version>2.2.0-SNAPSHOT</spring-boot-admin.version>
+        <zipkin.version>2.11.3</zipkin.version>
+        <swagger.version>2.9.2</swagger.version>
+        <fastdfs-client.version>1.26.7</fastdfs-client.version>
+        <mysql.connector.version>8.0.13</mysql.connector.version>
+        <!-- common -->
+        <commons-io.version>2.6</commons-io.version>
+        <commons-collections4.version>4.1</commons-collections4.version>
+        <commons-beanutils.version>1.9.2</commons-beanutils.version>
+
+        <!-- 其它依赖 -->
+        <hibernate-validator.version>6.0.14.Final</hibernate-validator.version>
+        <mybatis.version>2.1.0</mybatis.version>
+        <pagehelper.version>1.2.10</pagehelper.version>
+        <poi.version>3.17</poi.version>
+        <xmlbeans.version>2.3.0</xmlbeans.version>
+        <hutool.version>4.5.0</hutool.version>
+        <jasypt.version>1.18</jasypt.version>
+        <kaptcha.version>0.0.9</kaptcha.version>
+        <json.version>20140107</json.version>
+        <okhttp.version>3.14.2</okhttp.version>
+        <aliyun.version>4.0.3</aliyun.version>
+        <weixin.version>3.4.0</weixin.version>
+        <jjwt.version>0.9.0</jjwt.version>
+        <qiniu.version>[7.2.0, 7.2.99]</qiniu.version>
+        <easyexcel.version>2.1.4</easyexcel.version>
+
+        <!-- docker -->
+        <docker.maven.verion>1.4.3</docker.maven.verion>
+        <docker.registry>registry.cn-hangzhou.aliyuncs.com</docker.registry>
+        <docker.namespace>spring-microservice-exam</docker.namespace>
+        <scanner.maven.version>3.3.0.603</scanner.maven.version>
+
+        <!-- logstash -->
+        <logstash.version>5.2</logstash.version>
+    </properties>
+
+    <dependencies>
+
+    </dependencies>
 
 
 </project>
