@@ -21,13 +21,13 @@
     </developers>
 
     <modules>
-        <module>config-service</module>
         <module>gateway-service</module>
         <module>common</module>
         <module>monitor-service</module>
         <module>modules</module>
         <module>zipkin-service</module>
         <module>config-service</module>
+        <module>gateway-service</module>
     </modules>
 
     <parent>
