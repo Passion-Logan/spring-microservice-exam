@@ -29,6 +29,7 @@
         <module>config-service</module>
         <module>gateway-service</module>
         <module>common</module>
+        <module>monitor-service</module>
     </modules>
 
     <parent>
