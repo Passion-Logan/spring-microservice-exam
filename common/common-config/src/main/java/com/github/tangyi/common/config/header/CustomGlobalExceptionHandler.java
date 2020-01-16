@@ -17,9 +17,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 全局异常处理<p>
- * 代码描述<p>
- * Copyright: Copyright (C) 2020 XXX, Inc. All rights reserved. <p>
+ * 全局异常处理
+ * <p>
+ * 代码描述
+ * <p>
+ * Copyright: Copyright (C) 2020 XXX, Inc. All rights reserved.
+ * <p>
  *
  * @author WQL
  * @since 2020年1月16日 0016 11:53
@@ -37,13 +40,11 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
      * @return
      */
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+        HttpHeaders headers, HttpStatus status, WebRequest request) {
         // 获取所有异常信息
-        List<String> errors = ex.getBindingResult()
-                .getFieldErrors()
-                .stream()
-                .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                .collect(Collectors.toList());
+        List<String> errors = ex.getBindingResult().getFieldErrors().stream()
+            .map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.toList());
         ResponseBean<List<String>> responseBean = new ResponseBean<>(errors, ApiMsg.KEY_SERVICE, ApiMsg.ERROR);
 
         return new ResponseEntity<>(responseBean, headers, status);
