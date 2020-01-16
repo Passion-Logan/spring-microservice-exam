@@ -10,7 +10,7 @@ package com.github.tangyi.common.core.exceptions;
  */
 public class CommonException extends RuntimeException{
 
-    public static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     public CommonException() {
     }
