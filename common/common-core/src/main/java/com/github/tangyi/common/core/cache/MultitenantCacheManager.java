@@ -1,5 +1,6 @@
 package com.github.tangyi.common.core.cache;
 
+import com.github.tangyi.common.core.utils.SysUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.cache.Cache;
