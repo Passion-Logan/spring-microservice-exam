@@ -1,13 +1,18 @@
 package com.github.tangyi.common.core.config;
 
-import com.github.tangyi.common.core.properties.SnowflakeProperties;
-import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.github.tangyi.common.core.properties.SnowflakeProperties;
+import com.github.tangyi.common.core.utils.SnowflakeIdWorker;
+
+import lombok.AllArgsConstructor;
+
 /**
- * ID生成配置<p>
- * 代码描述<p>
+ * ID生成配置
+ * <p>
+ * 代码描述
+ * <p>
  *
  * @author WQL
  * @since 2020年1月16日 0016 18:28
@@ -19,5 +24,8 @@ public class SnowFlake {
     private final SnowflakeProperties snowflakeProperties;
 
     @Bean
-    public SnowflakeIdWorker
+    public SnowflakeIdWorker initTokenWorker() {
+        return new SnowflakeIdWorker(Integer.parseInt(snowflakeProperties.getWorkId()),
+            Integer.parseInt(snowflakeProperties.getDataCenterId()));
+    }
 }
