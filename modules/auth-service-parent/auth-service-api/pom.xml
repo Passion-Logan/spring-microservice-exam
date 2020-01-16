@@ -3,23 +3,22 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <parent>
-        <artifactId>spring-microservice-exam</artifactId>
+        <artifactId>auth-service-parent</artifactId>
         <groupId>com.github.tangyi</groupId>
         <version>${revision}</version>
     </parent>
-    <artifactId>common</artifactId>
+    <artifactId>auth-service-api</artifactId>
     <name>${project.artifactId}</name>
-    <description>公共依赖</description>
+    <description>授权服务api</description>
 
-    <modules>
-        <module>common-config</module>
-        <module>common-core</module>
-        <module>common-log</module>
-        <module>common-oss</module>
-        <module>common-security</module>
-        <module>common-feign</module>
-    </modules>
+    <dependencies>
+        <!-- common-core -->
+        <dependency>
+            <groupId>com.github.tangyi</groupId>
+            <artifactId>common-core</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
