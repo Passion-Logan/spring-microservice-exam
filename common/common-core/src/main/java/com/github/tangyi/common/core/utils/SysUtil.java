@@ -1,13 +1,28 @@
 package com.github.tangyi.common.core.utils;
 
-import com.github.tangyi.common.security.constant.SecurityConstant;
-import lombok.extern.slf4j.Slf4j;
+import java.nio.charset.StandardCharsets;
+import java.security.Principal;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang3.StringUtils;
+import org.bouncycastle.util.encoders.Base64;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.security.Principal;
+import com.github.tangyi.common.security.constant.SecurityConstant;
+import com.github.tangyi.common.security.tenant.TenantContextHolder;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 系统工具类
@@ -66,10 +81,51 @@ public class SysUtil {
         return tenantCode;
     }
 
+    /**
+     * 获取当前登录的租户code
+     *
+     * @return
+     */
     private static String getCurrentUserTenantCode() {
         String tenantCode = "";
         try {
-            ResourceServerTokenServices resourceServerTokenServices = SpringContextHolder.getApplicationContext().getBean(ResourceServerTokenServices.class);
+            ResourceServerTokenServices resourceServerTokenServices =
+                SpringContextHolder.getApplicationContext().getBean(ResourceServerTokenServices.class);
+            Object details = SecurityContextHolder.getContext().getAuthentication().getDetails();
+            if (details instanceof OAuth2AuthenticationDetails) {
+                OAuth2AuthenticationDetails oAuth2AuthenticationDetails = (OAuth2AuthenticationDetails)details;
+                OAuth2AccessToken oAuth2AccessToken =
+                    resourceServerTokenServices.readAccessToken(oAuth2AuthenticationDetails.getTokenValue());
+                Object tenantObj = oAuth2AccessToken.getAdditionalInformation().get(SecurityConstant.TENANT_CODE);
+                tenantCode = tenantCode == null ? "" : tenantObj.toString();
+            } else if (details instanceof WebAuthenticationDetails) {
+                // 未认证
+                Object requestObj = RequestContextHolder.getRequestAttributes();
+                if (requestObj != null) {
+                    HttpServletRequest request = ((ServletRequestAttributes)requestObj).getRequest();
+                    tenantCode = request.getParameter(SecurityConstant.TENANT_CODE);
+                }
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
         }
+
+        return tenantCode;
+    }
+
+    /**
+     * des解密
+     *
+     * @param data
+     * @param pass
+     * @return
+     * @throws Exception
+     */
+    public static String decryptAES(String data, String pass) throws Exception {
+        Cipher cipher = Cipher.getInstance(DEFAULT_CIPHER_ALGORITHM);
+        cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(pass.getBytes(), KEY_ALGORITHM),
+            new IvParameterSpec(pass.getBytes()));
+        byte[] result = cipher.doFinal(Base64.decode(data.getBytes(StandardCharsets.UTF_8)));
+        return new String(result, StandardCharsets.UTF_8);
     }
 }

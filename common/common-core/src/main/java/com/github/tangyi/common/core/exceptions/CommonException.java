@@ -1,19 +1,21 @@
 package com.github.tangyi.common.core.exceptions;
 
 /**
- * 公共异常<p>
- * 代码描述<p>
- * Copyright: Copyright (C) 2020 XXX, Inc. All rights reserved. <p>
+ * 公共异常
+ * <p>
+ * 代码描述
+ * <p>
+ * Copyright: Copyright (C) 2020 XXX, Inc. All rights reserved.
+ * <p>
  *
  * @author WQL
  * @since 2020年1月16日 0016 12:35
  */
-public class CommonException extends RuntimeException{
+public class CommonException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
-    public CommonException() {
-    }
+    public CommonException() {}
 
     public CommonException(String message) {
         super(message);
