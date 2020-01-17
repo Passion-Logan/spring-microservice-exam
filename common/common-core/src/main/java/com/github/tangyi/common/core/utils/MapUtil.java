@@ -1,8 +1,5 @@
 package com.github.tangyi.common.core.utils;
 
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.lang3.StringUtils;
-
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
@@ -11,6 +8,9 @@ import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.*;
+
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * 应用模块名称
@@ -26,9 +26,12 @@ public class MapUtil {
     /**
      * 从map集合中获取属性值
      *
-     * @param map          map集合
-     * @param key          键对
-     * @param defaultValue 默认值
+     * @param map
+     *            map集合
+     * @param key
+     *            键对
+     * @param defaultValue
+     *            默认值
      * @return E
      */
     @SuppressWarnings({"unchecked"})
@@ -37,14 +40,16 @@ public class MapUtil {
         if (o == null) {
             return defaultValue;
         }
-        return (E) o;
+        return (E)o;
     }
 
     /**
      * 获取map中key对应的值，转成字符串
      *
-     * @param map map集合
-     * @param key 键对
+     * @param map
+     *            map集合
+     * @param key
+     *            键对
      * @return String 对应的键值，并格式为字符串
      */
     public final static String getString(Map<String, Object> map, String key) {
@@ -58,14 +63,16 @@ public class MapUtil {
     /**
      * 获取map中key对应的值，转成Date
      *
-     * @param map map集合
-     * @param key 键对
+     * @param map
+     *            map集合
+     * @param key
+     *            键对
      * @return Date 对应的键值，并格式为Date类型
      */
     public final static Date getDate(Map<String, Object> map, String key) {
         Object o = map.get(key);
         if (o != null) {
-            return (Date) o;
+            return (Date)o;
         }
         return null;
     }
@@ -73,8 +80,10 @@ public class MapUtil {
     /**
      * 获取map中key对应的值，转成Double类型
      *
-     * @param map map集合
-     * @param key 键对
+     * @param map
+     *            map集合
+     * @param key
+     *            键对
      * @return Double 对应的键值，并格式为Double类型
      */
     public final static Double getDouble(Map<String, Object> map, String key) {
@@ -85,14 +94,16 @@ public class MapUtil {
     /**
      * 获取map中key对应的值，转成布尔类型
      *
-     * @param map map集合
-     * @param key 键对
+     * @param map
+     *            map集合
+     * @param key
+     *            键对
      * @return Boolean 对应的键值，并格式为Boolean类型
      */
     public final static Boolean getBooleanValue(Map<String, Object> map, String key) {
         Object o = map.get(key);
         if (o != null) {
-            return (Boolean) o;
+            return (Boolean)o;
         }
         return null;
     }
@@ -100,11 +111,13 @@ public class MapUtil {
     /**
      * Map集合对象转化成 JavaBean集合对象
      *
-     * @param clazz   clazz
-     * @param mapList Map数据集对象
+     * @param clazz
+     *            clazz
+     * @param mapList
+     *            Map数据集对象
      */
     public static <T> List<T> map2Java(Class<T> clazz, List<Map<String, Object>> mapList)
-            throws InstantiationException, IllegalAccessException {
+        throws InstantiationException, IllegalAccessException {
         List<T> list = new ArrayList<>();
         if (mapList != null && mapList.size() > 0) {
             T bean;
@@ -120,8 +133,10 @@ public class MapUtil {
     /**
      * Map对象转化成 JavaBean对象
      *
-     * @param javaBean JavaBean实例对象
-     * @param map      Map对象
+     * @param javaBean
+     *            JavaBean实例对象
+     * @param map
+     *            Map对象
      */
     public static <T> T map2Java(T javaBean, Map<String, Object> map) {
         try {
@@ -147,13 +162,13 @@ public class MapUtil {
                         Type fc = temFiels.getGenericType();
                         // 如果不为空并且是泛型参数的类型
                         if (fc instanceof ParameterizedType) {
-                            ParameterizedType pt = (ParameterizedType) fc;
+                            ParameterizedType pt = (ParameterizedType)fc;
                             Type[] types = pt.getActualTypeArguments();
                             // 只处理一个泛型参数
                             if (types != null && types.length == 1) {
-                                Object tempObj = ((Class<?>) types[0]).newInstance();
+                                Object tempObj = ((Class<?>)types[0]).newInstance();
                                 ReflectionUtil.setFieldValue(tempObj, temp[2], map.get(key));
-                                ((List) o).add(tempObj);
+                                ((List)o).add(tempObj);
                                 BeanUtils.setProperty(javaBean, temp[0], o);
                             }
                         }
@@ -178,8 +193,10 @@ public class MapUtil {
     /**
      * 循环向上转型
      *
-     * @param object    子类对象
-     * @param fieldName fieldName
+     * @param object
+     *            子类对象
+     * @param fieldName
+     *            fieldName
      * @return Field
      */
     public static Field getDeclaredField(Object object, String fieldName) {
@@ -197,11 +214,11 @@ public class MapUtil {
         return null;
     }
 
-
     /**
      * JavaBean集合对象转化成Map集合对象
      *
-     * @param javaBeanList JavaBean数据集对象
+     * @param javaBeanList
+     *            JavaBean数据集对象
      * @return List
      */
     public static <E> List<Map<String, Object>> java2Map(List<E> javaBeanList) {
@@ -223,7 +240,8 @@ public class MapUtil {
     /**
      * JavaBean对象转化成Map对象
      *
-     * @param javaBean javaBean
+     * @param javaBean
+     *            javaBean
      * @return Map
      */
     public static Map<String, Object> java2Map(Object javaBean) {
