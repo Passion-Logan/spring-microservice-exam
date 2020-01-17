@@ -1,7 +1,8 @@
 package com.github.tangyi.common.log.event;
 
-import com.github.tangyi.common.core.model.Log;
 import org.springframework.context.ApplicationEvent;
+
+import com.github.tangyi.common.core.model.Log;
 
 /**
  * 日志事件
